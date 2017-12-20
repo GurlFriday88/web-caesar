@@ -23,6 +23,7 @@ formOne= """
                 margin: 10px 0;
                 width: 540px;
                 height: 120px;
+                display: block;
             }
         </style>
     </head>
@@ -34,7 +35,7 @@ formOne= """
                 <input type = "text"  name = "rot" value = 0>
             </label>
                 <textarea name= "text"></textarea>
-            <button type = "submit" form = "form" value = "Submit"> Submit </button>
+            <input type= "submit" value="encrypt"/>
 
         </form>
     </body>
@@ -51,10 +52,11 @@ def index():
 
 @app.route('/', methods=["POST"])
 def encrypt():
-    rotation = request.form(['rot'])
-    text= request.form(['text'])
-    encryption =rotate_string(text, rotation)
-    return encryption
+    rotation_element = request.form(['rot'])
+    text_element= request.form(['text'])
+    encryption_element =rotate_string(text_element, rotation_element)
+    content = formOne + "<p>"+ encryption_element + "</p>"
+    return content
 
 
 app.run()
